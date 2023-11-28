@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class ClientTest {
     public static void main(String[] args) {
         try {
-            Socket yhd = new Socket("192.168.0.114", 7777);
+            Socket yhd = new Socket("192.168.88.1", 9999);
 
             System.out.print("서버에서 보낸 메시지입니다 : ");
             InputStream cis = yhd.getInputStream();
