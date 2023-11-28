@@ -6,7 +6,7 @@ public class ClientFileTest {
 
     public static void main(String[] args) {
         try {
-            Socket yhd = new Socket("192.168.0.114", 9999);
+            Socket yhd = new Socket("192.168.88.1", 9999);
 
             // 여기부터 요청하는 코드
             System.out.print("서버에 요청할 메시지를 입력하세요 : ");

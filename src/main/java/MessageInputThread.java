@@ -17,22 +17,24 @@ public class MessageInputThread extends Thread {
 
             while (true) {
                 String message = bir.readLine();
-                if (message.endsWith(".jpeg")) {
+                if(message.startsWith("DM : ")) {
 
-                    InputStream cis = socket.getInputStream();
-                    BufferedInputStream brs = new BufferedInputStream(cis);
+                    String dmMessage = message.substring("DM : ".length());
+                    System.out.println("수신받은 DM 메시지입니다 : " + dmMessage);
 
+                } else if (message.endsWith(".jpg")) {
+                    BufferedInputStream bis = new BufferedInputStream(is);
                     FileOutputStream fileOutputStream = new FileOutputStream("c:\\test2\\" + message);
-                    byte[] bytes = brs.readAllBytes();
-                    for (int i = 0; i < bytes.length; i++) {
+                    byte[] bytes = bis.readAllBytes();
+                    for(int i=0; i<bytes.length; i++) {
                         fileOutputStream.write(bytes[i]);
                     }
+                    fileOutputStream.close();
                     // 여기까지 요청받는 코드
                 } else {
                     System.out.println("수신받은 메시지입니다 : " + message);
                 }
             }
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

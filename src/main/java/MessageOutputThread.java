@@ -12,17 +12,29 @@ public class MessageOutputThread extends Thread {
     @Override
     public void run() {
         try {
-                 Scanner sc = new Scanner(System.in);
-                 OutputStream os = socket.getOutputStream();
-                 PrintStream ps = new PrintStream(os);
-
-                 System.out.println("클라이언트의 ID 를 입력하세요 : ");
-                 String client1 = sc.nextLine();
-                 ps.println(client1);
+            OutputStream os = socket.getOutputStream();
+            //OutputStreamWriter osw = new OutputStreamWriter(os);
+            //BufferedWriter bow = new BufferedWriter(osw);
+            PrintStream ps = new PrintStream(os);
+            Scanner sc = new Scanner(System.in);
 
             while(true) {
-                String test2 = sc.nextLine();
-                ps.println(test2);
+                System.out.print("송신할 메시지를 입력하세요 : ");
+                String message = sc.nextLine();
+                if(message.endsWith(".jpg")) {
+                    ps.println(message);
+                    FileInputStream fis = new FileInputStream("c:\\test3\\" + message);
+
+                    BufferedOutputStream bos = new BufferedOutputStream(os);
+                    byte[] bytes = fis.readAllBytes();
+                    for(int i=0; i<bytes.length; i++) {
+                        bos.write(bytes[i]);
+                    }
+                    bos.flush();
+                    fis.close();
+                } else {
+                    ps.println(message);
+                }
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
