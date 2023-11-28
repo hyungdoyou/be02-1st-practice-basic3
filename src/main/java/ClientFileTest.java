@@ -6,7 +6,7 @@ public class ClientFileTest {
 
     public static void main(String[] args) {
         try {
-            Socket yhd = new Socket("192.168.88.1", 9999);
+            Socket yhd = new Socket("192.168.0.114", 9999);
 
             // 여기부터 요청하는 코드
             System.out.print("서버에 요청할 메시지를 입력하세요 : ");
@@ -27,17 +27,17 @@ public class ClientFileTest {
             byte[] bytes = brs.readAllBytes();
             for(int i=0; i<bytes.length; i++) {
                 fileOutputStream.write(bytes[i]);
-                System.out.print(bytes[i]);
             }
             // 여기까지 요청받는 코드
 
             System.out.print("요청이 이뤄졌습니다.");
 
+            brs.close();
+            ps.close();
             yhd.close();
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 }
